@@ -14,8 +14,8 @@ public:
         int max_enrollment;
         unsigned int basescore;
 public:
-        Course(int cid,string name,int sid, int max_num,int bscore )
-            {course_id = cid; course_name = name; school_id = sid; max_enrollment = max_num; basescore=bscore; }
+        Course()
+            {}
 
         set_course(int cid,string name,int sid, int max_num,int bscore)
                 {course_id = cid; course_name = name; school_id = sid; max_enrollment = max_num; basescore=bscore; }

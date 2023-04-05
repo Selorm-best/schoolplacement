@@ -5,6 +5,9 @@
 #include <vector>
 #include "course.h"
 #include "student.h"
+#include "school.h"
+#include "result.h"
+#include "application.h"
 using namespace std;
 
 
@@ -30,43 +33,40 @@ default:
 
 
 }*/
-   /* vector<Student> students ;
-    ifstream inputfile;
-    inputfile.open("C:\\temp\\Students.csv");
+//Unit tests
+//testing display of students
+//  Student* studentrecord = new Student();
+ // studentrecord->display(studentrecord,3031520);
 
-    string line = "";
-    getline(inputfile, line);
-    line = "";
-    while(getline(inputfile,line)){
-        int indexNumber;
-        string surname;
-        string firstname;
-        string  tempString =" ";
-        stringstream inputString(line);
+//testing Student User verification
+/*Student *currentstudent = new Student();
+cout<<currentstudent ->verify_student(3031520,"123as",currentstudent)<<endl;*/
 
-        getline(inputString,surname,',');
-        getline(inputString,firstname,',');
-        getline(inputString,tempString,',');
-        indexNumber =atoi(tempString.c_str());
-        //After every record of students, construct student object and add to vector
-        Student studentrecord(surname,firstname,indexNumber);
-        students.push_back(studentrecord);
+//testing School user verification
+/*School * currentschool = new School();
+cout<<currentschool ->verify_school(1,"qwerty",currentschool)<<endl;
 
+// Testing Schools' records display
+/*School * schoolrecord = new School();
+schoolrecord->display(schoolrecord);*/
 
-        line = "";
-    }
-    for (auto student : students){
-            student.display();
+//Testing results Display
+//Result * studentresult = new Result();
 
-        }
-*/
+//studentresult->display_result(3021520, studentresult);
+Application *app= new Application(3021520);
+app->view_application(3021520,app);
+
+    /*
+        Testing display of course records
 
         Course *courserecord = new Course(0,"",0,0,0);
         courserecord->view_courses(courserecord);
 
+        Testing the course create feature
         Course course(0,"",0,0,0);
         course.create_course(2);
         cout<<"School name  id  is "<<courserecord->school_id<<"\n";
-
+        */
 return 0;
 }
