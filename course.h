@@ -98,18 +98,56 @@ public:
 
 
 
-// Display a specific course for all schools
-         void view_course(int course_id){
-        cout<< course_name<<" Options \n";
-        cout<<"School: "<<school_id<<endl;
-        cout<<"Maximum Number of Enrollments:"<<max_enrollment<<endl;
-        }
 
 //Display a specific course for a specific school
         void view_course(int school_id, int course_id){
              cout<<"Name of course: "<<course_name<<endl;;
             cout<<"Maximum Number of enrollments : "<<max_enrollment<<endl;
             cout<<"The base raw score is: "<<basescore<<endl;
+        }
+
+
+        void retrieve_course(Course*course, int school_id, int coursecode){
+
+    ifstream inputfile;
+    inputfile.open("Courses.csv", ios::out | ios::app);
+    int schoolcode = 2;
+    string line = "";
+    getline(inputfile, line);
+    line = "";
+    while(getline(inputfile,line)){
+        int courseId;
+        string coursename;
+        int schoolid;
+        int maxenroll;
+        int basescore;
+        string  tempString =" ";
+        stringstream inputString(line);
+
+        getline(inputString,tempString,',');
+        courseId =atoi(tempString.c_str());
+
+        getline(inputString,coursename,',');
+
+        getline(inputString,tempString,',');
+
+        schoolid =atoi(tempString.c_str());
+        if (schoolid == school_id && coursecode == courseId){
+        getline(inputString,tempString,',');
+         maxenroll=atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        basescore =atoi(tempString.c_str());
+
+        //After every record of Construct, construct student object and add to vector
+        course->set_course(courseId,coursename,schoolid,maxenroll,basescore);
+
+
+
+        line = "";
+        }
+    }
+
         }
 private:
          delete_course(int course_id){

@@ -35,8 +35,8 @@ default:
 }*/
 //Unit tests
 //testing display of students
-//  Student* studentrecord = new Student();
- // studentrecord->display(studentrecord,3031520);
+ //Student* studentrecord = new Student();
+  //studentrecord->display(studentrecord,3021520);
 
 //testing Student User verification
 /*Student *currentstudent = new Student();
@@ -54,8 +54,10 @@ schoolrecord->display(schoolrecord);*/
 //Result * studentresult = new Result();
 
 //studentresult->display_result(3021520, studentresult);
-Application *app= new Application(3021520);
-app->view_application(3021520,app);
+
+// Viewind the Application list of a student
+//Application *app= new Application(3021520);
+//app->view_application(3021520,app);
 
     /*
         Testing display of course records

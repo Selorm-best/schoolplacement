@@ -3,21 +3,31 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+#include <conio.h>>
 using namespace std;
 
+//This Function is a Global function that helps to return a status text for each status boolean code of the application choices in  csv file
+string show_admission_status(int status){
+    string admission_status  = status == 1 ? "Admitted": status == 0 ? "Pending" :"Invalid Status";
+            return admission_status;
+}
+
+// Here is the main class model of the Application data
 class Application{
 private:
     int index_number;
-    //All choices are an array of the school choice's id, course choice id and status of admission
+    //All choices are an array of the school choice's id, course choice id and status of admission respectively
     int first_choice[3];
     int second_choice[3];
     int third_choice[3];
     int fourth_choice[3];
 
 public:
+    // This runs as soon as the object of application  is created. It sets the index_number attribute to the value the user provides when creating the object
     Application(int index_no)
                 {index_number = index_no; }
+
+    // This method helps to assign the values of the application choices' attrubutes
     void set_application(int firstchoice[],int secondchoice[], int thirdchoice[],int fourthchoice[]){
     first_choice[0] = *(firstchoice);
     first_choice[1] = *(firstchoice+1);
@@ -36,17 +46,21 @@ public:
       fourth_choice[2]=fourthchoice[2];
     }
 
-    //View All Applications for a Student
+    //Helps to View the Application of a Student
     void view_application(int index_no, Application*app){
-        vector<Application> applications;
-        ifstream file;
-    file.open("application.csv",ios::out|ios::app);
 
+        vector<Application> applications;
+    ifstream file;
+    file.open("application.csv",ios::out|ios::app); //We open the csv file containin the data
+
+// This block of code gets the first line of the csv file which is the title.
     string line="";
     getline(file,line);
-    line="";
+    line="";     //We do not want that to be viewed so we clear it from the input we are getting
 
+    // This loop goes through the rest of the csv file line by line
     while(getline(file,line)){
+
 
         int indexnumber;
         int firstchoice[3];
@@ -104,17 +118,39 @@ file.close();
             }
             else{
             School *school = new School();
-            Course course;
+            Course *course = new Course();;
             for (auto application : applications){
             cout<< "Here is Your Application List for \n\n";
             cout<<"Student name: ("<<index_number<<")"<<endl;
             cout<<"Your raw Score of best Six subjects"<<endl;
+
             school->retrieve(school,application.first_choice[0]);
-            cout<<"First choice:\n School Name:"<<school->schoolName<<"\nCourse Name: "<<first_choice[1]<<"\nCut off:\nAdmission Status: "<<application.first_choice[2]<<endl;
-            /*cout<<"Second choice:\n School Name:"<<second_choice[0]<<"\nCourse Name: "<<second_choice[1]<<"\nCut off:"<<basescore<<"\nAdmission Status: "<<second_choice[2]<<endl;
-            cout<<"Third choice:\n School Name:"<<third_choice[0]<<"\nCourse Name: "<<third_choice[1]<<"\nCut off:"<<basescore<<"\nAdmission Status: "<<third_choice[2]<<endl;
-            cout<<"Fourth choice:\n School Name:"<<fourth_choice[0]<<"\nCourse Name: "<<fourth_choice[1]<<"\nCut off:"<<basescore<<"\nAdmission Status: "<<fourth_choice[2]<<endl;
-    */
+            course->retrieve_course(course,application.first_choice[0],first_choice[1]);
+            School school1 = *school;
+            Course course1 = *course;
+            cout<<"First choice:\n============\nSchool Name:"<<school1.schoolName<<"\nCourse Name: "<<course1.course_name
+            <<"\nCut off:"<<course1.basescore <<"\nAdmission Status: "<<show_admission_status(first_choice[2])<<"\n"<<endl;
+
+            school->retrieve(school,application.second_choice[0]);
+            course->retrieve_course(course,application.second_choice[0],second_choice[1]);
+            School school2 = *school;
+            Course course2 = *course;
+            cout<<"Second choice:\n============\nSchool Name:"<<school2.schoolName<<"\nCourse Name: "<<course2.course_name
+            <<"\nCut off:"<<course2.basescore <<"\nAdmission Status: "<<show_admission_status(second_choice[2])<<"\n"<<endl;
+
+            school->retrieve(school,application.third_choice[0]);
+            course->retrieve_course(course,application.third_choice[0],third_choice[1]);
+            School school3 = *school;
+            Course course3 = *course;
+            cout<<"Third choice:\n============\nSchool Name:"<<school3.schoolName<<"\nCourse Name: "<<course3.course_name
+            <<"\nCut off:"<<course3.basescore <<"\nAdmission Status: "<<show_admission_status(third_choice[2])<<"\n"<<endl;
+
+            school->retrieve(school,application.fourth_choice[0]);
+            course->retrieve_course(course,application.fourth_choice[0],fourth_choice[1]);
+            School school4 = *school;
+            Course course4 = *course;
+            cout<<"Fourth choice:\n============\nSchool Name:"<<school4.schoolName<<"\nCourse Name: "<<course4.course_name
+            <<"\nCut off:"<<course4.basescore <<"\nAdmission Status: "<<show_admission_status(fourth_choice[2])<<"\n"<<endl;
             }
             }
     }
