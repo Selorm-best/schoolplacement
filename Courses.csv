@@ -1,11 +1,11 @@
 courseid,coursename,schoolid,maxenrollment,base raw score
 1000,General Science with ICT,3,4,450
-1001,General Science with Geography,1,5,500
+1001,General Science with Geography,1,5,400
 1003,General Arts with French,2,2,500
 1004,Business with Econmics,2,5,400
-1005,home economic,4,60,500
+1005,home economic,4,60,400
 1006,Visual Arts with MAths,4,300,300
 1007,Agriculture Science,3,50,400
 1008,French&Maths,3,30,320
 1009,Home Econs,3,30,200
-1010,Science with Agric,3,40,350,
+1010,Science with Agric,3,40,350

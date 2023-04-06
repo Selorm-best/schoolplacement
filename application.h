@@ -3,8 +3,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
-
+#include<sstream>;
+#include <vector>;
+#include <algorithm>
+#include <iterator>
+#include <array>
 using namespace std;
 
 //This Function is a Global function that helps to return a status text for each status boolean code of the application choices in  csv file
@@ -207,7 +210,7 @@ file.close();
 
 
     //View All Applications for a School
-    view_applications(int school_no, Application*app)const{
+    view_applications(int school_no, Application*app){
 
     vector<Application> applications;
     ifstream file;
@@ -263,12 +266,19 @@ file.close();
         getline(inputString,tempString,',');
         fourthchoice[2]=atoi(tempString.c_str());
 
-     if (school_no == firstchoice[0] || school_no == secondchoice[0] || school_no == thirdchoice[0] || school_no == fourthchoice[0] ){
-        app->set_application(indexnumber,firstchoice,secondchoice,thirdchoice,fourthchoice);
-        applications.push_back(*(app));
+     if (school_no == firstchoice[0] )
+        app->set_application(indexnumber,firstchoice,second_choice,third_choice,fourth_choice);
+    if (school_no == secondchoice[0])
+        app->set_application(indexnumber,first_choice,secondchoice,third_choice,fourth_choice);
+    if (school_no == thirdchoice[0] )
+        app->set_application(indexnumber,first_choice,second_choice,thirdchoice,fourth_choice);
+    if(school_no == fourthchoice[0] )
+        app->set_application(indexnumber,first_choice,second_choice,third_choice,fourthchoice);
+    if  (school_no == firstchoice[0] || school_no == secondchoice[0]  || school_no == thirdchoice[0]  || school_no == fourthchoice[0] )
+            applications.push_back(*(app));
 
 
-        }
+
           line ="";
     }
 file.close();
@@ -286,7 +296,7 @@ file.close();
             cout<<"============      ===========     =================          =============      ============    =========="<<endl;
             for (auto application : applications){
 
-
+        if (application.first_choice[0] == school_no){
             student->retrieve(student,application.index_number);
             course->retrieve_course(course,application.first_choice[0],application.first_choice[1]);
             result ->retrieve_result(application.index_number, result);
@@ -295,13 +305,127 @@ file.close();
             Result  resultdata = *result;
             cout<<studentdata.surName<<"         "<<application.index_number<<"      "<<coursedata.course_name
             <<"     "<<resultdata.total_score<<"            "<<coursedata.basescore<<"              "<<show_admission_status(application.first_choice[2])<<endl;
+
+        }
+
+         if (application.second_choice[0]==school_no){
+            student->retrieve(student,application.index_number);
+            course->retrieve_course(course,application.second_choice[0],application.second_choice[1]);
+            result ->retrieve_result(application.index_number, result);
+           Student studentdata = *student;
+            Course coursedata = *course;
+            Result  resultdata = *result;
+            cout<<studentdata.surName<<"         "<<application.index_number<<"      "<<coursedata.course_name
+            <<"     "<<resultdata.total_score<<"            "<<coursedata.basescore<<"              "<<show_admission_status(application.second_choice[2])<<endl;
+
+        }
+
+         if (application.third_choice[0] == school_no){
+            student->retrieve(student,application.index_number);
+            course->retrieve_course(course,application.third_choice[0],application.third_choice[1]);
+            result ->retrieve_result(application.index_number, result);
+           Student studentdata = *student;
+            Course coursedata = *course;
+            Result  resultdata = *result;
+            cout<<studentdata.surName<<"         "<<application.index_number<<"      "<<coursedata.course_name
+            <<"     "<<resultdata.total_score<<"            "<<coursedata.basescore<<"              "<<show_admission_status(application.third_choice[2])<<endl;
+
+        }
+
+          if (application.fourth_choice[0] == school_no){
+            student->retrieve(student,application.index_number);
+            course->retrieve_course(course,application.fourth_choice[0],application.fourth_choice[1]);
+            result ->retrieve_result(application.index_number, result);
+           Student studentdata = *student;
+            Course coursedata = *course;
+            Result  resultdata = *result;
+            cout<<studentdata.surName<<"         "<<application.index_number<<"      "<<coursedata.course_name
+            <<"     "<<resultdata.total_score<<"            "<<coursedata.basescore<<"              "<<show_admission_status(application.fourth_choice[2])<<endl;
+
+        }
   }
 }
 
     }
 
 
-    update_admission_status(int school_id){
+    void update_admission_status(int school_id){
+
+    const string filename = "application.csv";
+    const string temp_filename = "app_temp.csv";
+    Result *result = new Result();
+    Course *course = new Course();
+
+    ifstream infile(filename);
+    ofstream outfile(temp_filename);
+
+    string line;
+
+    while (getline(infile, line)) {
+        stringstream ss(line);
+        vector<string> fields;
+        string field;
+        while (getline(ss, field, ',')) {
+            fields.push_back(field);
+        }
+        // Modify the necessary fields here
+        //
+        int indexnumber = atoi(fields[0].c_str());
+        result->retrieve_result(indexnumber,result);
+        Result resultdata = *result;
+
+       int first_choice = atoi(fields[1].c_str());
+       int first_choice_course = atoi(fields[2].c_str());
+       course->retrieve_course(course,first_choice,first_choice_course);
+        Course course1 = *course;
+
+        int  second_choice = atoi(fields[4].c_str());
+        int  second_choice_course= atoi(fields[5].c_str());
+        course->retrieve_course(course,second_choice,second_choice_course);
+        Course course2 = *course;
+
+        int third_choice = atoi(fields[7].c_str()) ;
+        int third_choice_course = atoi(fields[8].c_str()) ;
+        course->retrieve_course(course,third_choice,third_choice_course);
+        Course course3 = *course;
+
+        int  fourth_choice=atoi(fields[10].c_str());
+        int  fourth_choice_course=atoi(fields[11].c_str());
+        course->retrieve_course(course,fourth_choice,first_choice_course);
+        Course course4 = *course;
+
+        //First choice check
+
+        if( resultdata.total_score >= course1.basescore && first_choice == school_id)
+            fields[3] = "1";
+        //Second choice check
+         if( resultdata.total_score >= course2.basescore && second_choice== school_id)
+            fields[6] = "1";
+        //Third Choice Check
+         if(resultdata.total_score >= course3.basescore && third_choice== school_id)
+            fields[9] = "1";
+         //Fourth Choice Check
+         if(resultdata.total_score >= course4.basescore && fourth_choice == school_id)
+            fields[12] = "1";
+
+        // Write the updated line to the temporary file
+        copy(fields.begin(), fields.end(),
+                  std::ostream_iterator<string>(outfile, ","));
+        outfile.seekp(-1, ios_base::cur);  // remove the extra comma
+        outfile << "\n";
+    }
+
+    infile.close();
+    outfile.close();
+
+    // Replace the original file with the updated file
+    remove(filename.c_str());
+    rename(temp_filename.c_str(), filename.c_str());
+
+
+
+
+
 
     }
 };

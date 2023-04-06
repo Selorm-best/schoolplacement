@@ -62,7 +62,7 @@ schoolrecord->display(schoolrecord);*/
 
 // Viewing the Application list of a school
 Application *app= new Application();
-app->view_applications(1,app);
+app->view_applications(3,app);
 
         //Testing display of course records
 
@@ -78,5 +78,11 @@ app->view_applications(1,app);
         //Application app;
         //app.create_application(3256789); //current Student user's index number will be the argument
 
+        //Testing updating admission status
+
+
+        //Application app;
+        //app.update_admission_status(3);
 return 0;
 }
+
