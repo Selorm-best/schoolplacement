@@ -14,18 +14,29 @@ public:
         int max_enrollment;
         unsigned int basescore;
 public:
-        Course()
-            {}
 
-        set_course(int cid,string name,int sid, int max_num,int bscore)
+        void set_course(int cid,string name,int sid, int max_num,int bscore)
                 {course_id = cid; course_name = name; school_id = sid; max_enrollment = max_num; basescore=bscore; }
-        create_course(int schoolid){
+        void create_course(int schoolid){
         fstream fout;
         string coursename;
         int maxenroll;
         int rawscore;
-        fout.open("Courses.csv", ios::out | ios::app);
 
+
+        ifstream inputfile;
+        inputfile.open("Courses.csv", ios::out | ios::app);
+
+        string line = "";
+        int count =0;
+        int coursecode=1000;
+       while(getline(inputfile, line,'\n')) {
+
+             count++;
+        }
+        coursecode+=count;
+        inputfile.close();
+    fout.open("Courses.csv", ios::out | ios::app);
         cout <<"Kindly enter the following details to create a course for your school\n";
         cout <<"coursename:";
         getline(cin,coursename);
@@ -34,7 +45,7 @@ public:
         cout <<"Basic raw score:";
         cin>> rawscore;
 
-        fout<<"200"<<","
+        fout<<coursecode<<","
                 <<coursename<<","
                 <<schoolid<<","
                 <<maxenroll<<","
@@ -42,12 +53,12 @@ public:
         fout.close();
         }
 //Display all courses offered by a school
-    view_courses(Course *courserecord){
+    void view_courses(Course *courserecord, int schoolcode){
 
     vector<Course> courses ;
     ifstream inputfile;
     inputfile.open("Courses.csv");
-    int schoolcode = 2;
+
     string line = "";
     getline(inputfile, line);
     line = "";
@@ -83,13 +94,19 @@ public:
         line = "";
         }
     }
+
+
     for (auto course : courses){
+            cout<<"Course Id: "<<course.course_id<<endl;
             cout<<"Name of course: "<<course.course_name<<endl;
             cout<<"Maximum Number of enrollments : "<<course.max_enrollment<<endl;
-            cout<<"The base raw score is: "<<course.basescore<<endl;
+            cout<<"Cutoff Raw Score: "<<course.basescore<<endl;
             cout<<"\n"<<endl;
 
         }
+
+
+
 
 
 

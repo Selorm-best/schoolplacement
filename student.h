@@ -10,17 +10,17 @@ using namespace std;
 
 class Student{
     //Student attributes
+
     int index_no;
+    string password;
+public:
     string surName;
     string otherName;
-    string password;
+
 
 //Constructor(runs on create an object of the class)
 public:
-        Student() {
-            index_no=0; surName = "";otherName = ""; password = "";
 
-            }
  // Sets the values of attributes of the object created
         void set_student(string surname,string firstname,int indexNumber){
         surName = surname;
@@ -29,7 +29,42 @@ public:
         }
 
 
-        void display(Student* studentrecord, int index_id){
+        void retrieve(Student* student, int index_id){
+
+
+        ifstream inputfile;
+        inputfile.open("Students.csv", ios::out | ios::app);
+
+        string line = "";
+        getline(inputfile, line);
+        line = "";
+        while(getline(inputfile,line)){
+        int indexNumber;
+        string surname;
+        string firstname;
+        string  tempString =" ";
+        stringstream inputString(line);
+
+    //Pick each Cell value on the line and store in a variable
+        getline(inputString,surname,',');
+        getline(inputString,firstname,',');
+        getline(inputString,tempString,',');
+        indexNumber =atoi(tempString.c_str());
+
+        if(indexNumber ==index_id){
+
+        //After every record of students, construct student object and add to vector
+        student->set_student(surname,firstname,indexNumber);
+
+
+        }
+        line = "";
+    }
+
+
+    }
+
+    void display(Student* studentrecord, int index_id){
 
         vector<Student> students ;
         ifstream inputfile;
@@ -70,6 +105,7 @@ public:
     }
 
     }
+
 
     bool verify_student(int index_number, string password, Student* currentstudent){
     bool userverified = false;

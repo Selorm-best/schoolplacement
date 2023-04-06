@@ -1,2 +1,4 @@
 indexnumber,firstchoiceschool,firstchoicecourse,status,secondchoiceschool,secondchoicecourse,status,thirdchoiceschool,thirdchoicecourse,status,fourthchoiceschool,fourthchoicecourse,status
-3021520,1,1004,1,2,1005,0,3,1003,1,,,0
+3021520,1,1001,0,2,1003,0,3,1000,0,4,1006,0
+3010021,2,1003,0,1,1001,0,3,1000,0,4,1005,0
+3256789,1,1001,0,3,1007,0,4,1006,0,3,1008,0

@@ -15,10 +15,10 @@ private:
     int subject_4;
     int subject_5;
     int subject_6;
+public:
     int  total_score;
 
 public:
-    Result(){}
 
     void set_result(int index_no,int subject1,int subject2,int subject3,int subject4,int subject5,int subject6,int totalscore){
     index_number = index_no;
@@ -94,7 +94,55 @@ for(auto result : results){
     cout<<"Total Score:                     " <<result.total_score<<endl;
 }
     }
+  void retrieve_result(int index_no, Result * result){
 
+    ifstream file;
+    file.open("results.csv",ios::out|ios::app);
+
+    string line="";
+    getline(file,line);
+    line="";
+
+    while(getline(file,line)){
+
+        int indexnumber;
+        int subject1;
+        int subject2;
+        int subject3;
+        int subject4;
+        int subject5;
+        int subject6;
+        int totalscore;
+        string tempString ="";
+        stringstream inputString(line);
+        getline(inputString,tempString,',');
+        indexnumber = atoi(tempString.c_str());
+        if (indexnumber == index_no){
+        getline(inputString,tempString,',');
+        subject1=atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        subject2=atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        subject3=atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        subject4=atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        subject5=atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        subject6=atoi(tempString.c_str());
+
+        totalscore =subject1+subject2+subject3+subject4+subject5+subject6;
+        result -> set_result(index_no,subject1,subject2,subject3,subject4,subject5,subject6,totalscore);
+
+        }
+        line ="";
+    }
+ }
 
 };
 

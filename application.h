@@ -3,7 +3,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <conio.h>>
+
+
 using namespace std;
 
 //This Function is a Global function that helps to return a status text for each status boolean code of the application choices in  csv file
@@ -23,12 +24,10 @@ private:
     int fourth_choice[3];
 
 public:
-    // This runs as soon as the object of application  is created. It sets the index_number attribute to the value the user provides when creating the object
-    Application(int index_no)
-                {index_number = index_no; }
 
     // This method helps to assign the values of the application choices' attrubutes
-    void set_application(int firstchoice[],int secondchoice[], int thirdchoice[],int fourthchoice[]){
+    void set_application(int index_no,int firstchoice[],int secondchoice[], int thirdchoice[],int fourthchoice[]){
+    index_number = index_no;
     first_choice[0] = *(firstchoice);
     first_choice[1] = *(firstchoice+1);
     first_choice[2] = *(firstchoice+2);
@@ -46,6 +45,56 @@ public:
       fourth_choice[2]=fourthchoice[2];
     }
 
+//This methods aids students users to create application for themselves to school in the list and the courses they offer
+void create_application(int index_no){
+School*schoolrecord = new School();
+ vector<School> schools = schoolrecord->display(schoolrecord,"data");
+Course*courserecord = new Course();
+int first_choice[3];
+int second_choice[3];
+int third_choice[3];
+int four_choice[3];
+fstream file;
+
+file.open("application.csv", ios::out | ios::app );
+
+cout<<"Here are the High Schools You can enroll for and the details of the courses they offer \n\n"<<endl;
+for(auto school: schools){
+    cout<<"School id - "<<school.school_id<<":"<<school.schoolName<<endl;
+    courserecord->view_courses(courserecord,school.school_id);
+}
+cout<<"Enter your first choice school and course respectively"<<endl;
+cout<<"School id:\n";
+cin >>first_choice[0];
+cout<<"Course id:\n";
+cin >>first_choice[1];
+
+cout<<"Enter your second choice school and course respectively"<<endl;
+cout<<"School id:\n";
+cin >>second_choice[0];
+cout<<"Course id:\n";
+cin >>second_choice[1];
+
+cout<<"Enter your third choice school and course respectively"<<endl;
+cout<<"School id:\n";
+cin >>third_choice[0];
+cout<<"Course id:\n";
+cin >>third_choice[1];
+
+cout<<"Enter your fourth choice school and course respectively"<<endl;
+cout<<"School id:\n";
+cin >>fourth_choice[0];
+cout<<"Course id:\n";
+cin >>fourth_choice[1];
+
+file<<index_no<<","
+    <<first_choice[0]<<","<<first_choice[1]<<","<<0<<","
+     <<second_choice[0]<<","<<second_choice[1]<<","<<0<<","
+    <<third_choice[0]<<","<<third_choice[1]<< "," <<0<<","
+    <<fourth_choice[0]<<","<<fourth_choice[1]<< "," <<0<<",\n";
+
+file.close();
+}
     //Helps to View the Application of a Student
     void view_application(int index_no, Application*app){
 
@@ -104,7 +153,7 @@ public:
         fourthchoice[2]=atoi(tempString.c_str());
 
 
-        app->set_application(firstchoice,secondchoice,thirdchoice,fourthchoice);
+        app->set_application(indexnumber,firstchoice,secondchoice,thirdchoice,fourthchoice);
         applications.push_back(*(app));
 
 
@@ -118,7 +167,8 @@ file.close();
             }
             else{
             School *school = new School();
-            Course *course = new Course();;
+            Course *course = new Course();
+
             for (auto application : applications){
             cout<< "Here is Your Application List for \n\n";
             cout<<"Student name: ("<<index_number<<")"<<endl;
@@ -154,12 +204,103 @@ file.close();
             }
             }
     }
+
+
     //View All Applications for a School
-    view_application(int school_no)const{
+    view_applications(int school_no, Application*app)const{
+
+    vector<Application> applications;
+    ifstream file;
+    file.open("application.csv",ios::out|ios::app); //We open the csv file containin the data
+
+// This block of code gets the first line of the csv file which is the title.
+    string line="";
+    getline(file,line);
+    line="";     //We do not want that to be viewed so we clear it from the input we are getting
+
+    // This loop goes through the rest of the csv file line by line
+    while(getline(file,line)){
 
 
+        int indexnumber;
+        int firstchoice[3];
+        int secondchoice[3];
+        int thirdchoice[3];
+        int fourthchoice[3];
+
+        string tempString ="";
+        stringstream inputString(line);
+        getline(inputString,tempString,',');
+        indexnumber = atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        firstchoice[0]=atoi(tempString.c_str());
+        getline(inputString,tempString,',');
+        firstchoice[1]=atoi(tempString.c_str());
+        getline(inputString,tempString,',');
+        firstchoice[2]=atoi(tempString.c_str());
+
+
+
+        getline(inputString,tempString,',');
+        secondchoice[0]=atoi(tempString.c_str());
+        getline(inputString,tempString,',');
+         secondchoice[1]=atoi(tempString.c_str());
+        getline(inputString,tempString,',');
+         secondchoice[2]=atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        thirdchoice[0]=atoi(tempString.c_str());
+        getline(inputString,tempString,',');
+        thirdchoice[1]=atoi(tempString.c_str());
+        getline(inputString,tempString,',');
+        thirdchoice[2]=atoi(tempString.c_str());
+
+        getline(inputString,tempString,',');
+        fourthchoice[0]=atoi(tempString.c_str());
+        getline(inputString,tempString,',');
+        fourthchoice[1]=atoi(tempString.c_str());
+        getline(inputString,tempString,',');
+        fourthchoice[2]=atoi(tempString.c_str());
+
+     if (school_no == firstchoice[0] || school_no == secondchoice[0] || school_no == thirdchoice[0] || school_no == fourthchoice[0] ){
+        app->set_application(indexnumber,firstchoice,secondchoice,thirdchoice,fourthchoice);
+        applications.push_back(*(app));
+
+
+        }
+          line ="";
+    }
+file.close();
+            if (applications.empty()==true){
+
+                cout<<"The Application record for this school where not found\n";
+            }
+            else{
+            Student *student = new Student();
+            Course *course = new Course();
+            Result * result = new Result();
+
+            cout<< "Here are Applications List to your school \n\n";
+            cout<<"Student Surname   Index Number      Course Choice             Total score       CutOff Score     Status"<<endl;
+            cout<<"============      ===========     =================          =============      ============    =========="<<endl;
+            for (auto application : applications){
+
+
+            student->retrieve(student,application.index_number);
+            course->retrieve_course(course,application.first_choice[0],application.first_choice[1]);
+            result ->retrieve_result(application.index_number, result);
+           Student studentdata = *student;
+            Course coursedata = *course;
+            Result  resultdata = *result;
+            cout<<studentdata.surName<<"         "<<application.index_number<<"      "<<coursedata.course_name
+            <<"     "<<resultdata.total_score<<"            "<<coursedata.basescore<<"              "<<show_admission_status(application.first_choice[2])<<endl;
+  }
+}
 
     }
+
+
     update_admission_status(int school_id){
 
     }

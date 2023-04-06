@@ -56,19 +56,27 @@ schoolrecord->display(schoolrecord);*/
 //studentresult->display_result(3021520, studentresult);
 
 // Viewind the Application list of a student
-//Application *app= new Application(3021520);
-//app->view_application(3021520,app);
+//Application *app= new Application();
+//app->view_application(3010021,app);
 
-    /*
-        Testing display of course records
 
-        Course *courserecord = new Course(0,"",0,0,0);
-        courserecord->view_courses(courserecord);
+// Viewing the Application list of a school
+Application *app= new Application();
+app->view_applications(1,app);
 
-        Testing the course create feature
-        Course course(0,"",0,0,0);
-        course.create_course(2);
-        cout<<"School name  id  is "<<courserecord->school_id<<"\n";
-        */
+        //Testing display of course records
+
+       // Course *courserecord = new Course();
+        //courserecord->view_courses(courserecord);
+
+
+        //Testing the course create feature
+        //Course course;
+        //course.create_course(3);
+        //Testing the application creation feature
+
+        //Application app;
+        //app.create_application(3256789); //current Student user's index number will be the argument
+
 return 0;
 }
