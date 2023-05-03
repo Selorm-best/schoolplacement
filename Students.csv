@@ -1,5 +1,9 @@
 Surname,Other names,Inde number,passwod
 HLORDJIE ,Japheth Selorm,3021520,123asd
 BONNEY,Emmanuel,3256789,qwe123
+<<<<<<< HEAD
 LAMPTEY,Samuel,3265001,asdfgh
+=======
+LAMPTEY,Samuel,32652001,asdfgh
+>>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
 AMISSAH,Frederick,3010021,abcdef

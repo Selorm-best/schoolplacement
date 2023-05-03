@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -14,9 +16,17 @@ public:
         int max_enrollment;
         unsigned int basescore;
 public:
+<<<<<<< HEAD
 
         void set_course(int cid,string name,int sid, int max_num,int bscore)
                 {course_id = cid; course_name = name; school_id = sid; max_enrollment = max_num; basescore=bscore; }
+=======
+        //The method  helps to set the attributes of the object being created
+        void set_course(int cid,string name,int sid, int max_num,int bscore)
+                {course_id = cid; course_name = name; school_id = sid; max_enrollment = max_num; basescore=bscore; }
+        
+        //This method  is  to help cinsert course detiuals into the csv file
+>>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
         void create_course(int schoolid){
         fstream fout;
         string coursename;
@@ -79,6 +89,8 @@ public:
         getline(inputString,tempString,',');
 
         schoolid =atoi(tempString.c_str());
+
+        //We create an object of the class for each line where the schoolid in the csv is equal to the argiument passed into the function
         if (schoolid == schoolcode){
         getline(inputString,tempString,',');
          maxenroll=atoi(tempString.c_str());
@@ -86,7 +98,7 @@ public:
         getline(inputString,tempString,',');
         basescore =atoi(tempString.c_str());
 
-        //After every record of Construct, construct student object and add to vector
+        //After every record of Construct, construct course object and add to vector
         courserecord->set_course(courseId,coursename,schoolid,maxenroll,basescore);
         courses.push_back(*(courserecord));
 
@@ -167,10 +179,10 @@ public:
 
         }
 private:
-         delete_course(int course_id){
+         void delete_course(int course_id){
 
         }
-        update_course(int course_id,int option, string newvalue){
+       void  update_course(int course_id,int option, string newvalue){
 
         }
 

@@ -1,4 +1,8 @@
 index_number,subject_1,subject_2,subject_3,subject_4,subject_5,subject_6
 3021520,80,60,52,80,70,90
+<<<<<<< HEAD
 3010021,70,95,85,84,61,90
+=======
+3010021,80,95,85,88,90,90
+>>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
 3256789,78,91,89,80,85,95
