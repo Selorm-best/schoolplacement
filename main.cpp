@@ -1,16 +1,15 @@
 
 // some header files
-#include "welcome.h"  
+#include "welcome.h"
 using namespace std;
 
 
+Welcome welcome;
 
 
-int main()
-{
-    
 
-}*/
+
+int main(){
    /* vector<Student> students ;
     ifstream inputfile;
     inputfile.open("C:\\temp\\Students.csv");
@@ -42,13 +41,13 @@ int main()
         }
 */
 
-        Course *courserecord = new Course(0,"",0,0,0);
-        courserecord->view_courses(courserecord);
+      //  Course *courserecord = new Course();
+        //courserecord->view_courses(courserecord,1);
 
-        Course course(0,"",0,0,0);
-        course.create_course(2);
-        cout<<"School name  id  is "<<courserecord->school_id<<"\n";
+        //Course course(0,"",0,0,0);
+        //course.create_course(2);
+       // cout<<"School name  id  is "<<courserecord->school_id<<"\n";
 
 return 0;
-}
 
+}

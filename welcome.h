@@ -12,9 +12,9 @@
 #include "school.h"
 #include "result.h"
 #include "application.h"
-    using namespace std;
+    ;
    class Welcome {
-            private: 
+            private:
             char response;
             int school_number;
             string password;
@@ -26,14 +26,14 @@
 
 
 
-            public: 
+            public:
             Welcome(){
               cout<<"\n\n"<<endl;
                cout<<"\t\t\t||-------------------------------------------------------------------------------------------||"<<endl;
                 cout<<"\t\t\t\t\tWelcome to the School Management System\n\n \t\t\t\tAre you a  SCHOOL ADMINISTRATOR( y ) || STUDENT( n ) ?  y / n "<<endl;
               cout<<"\t\t\t||--------------------------------------------------------------------------------------------||"<<endl;
                 this->response = getch();
-         
+
             // requireEnter();
 
             checkResponse(&response);
@@ -55,8 +55,8 @@
             void continueUserSection();
             void moreApplicationFeatures();
             void verifyStudent();
-   
-   
+
+
             }; // End of the class
 
 
@@ -81,7 +81,7 @@
             }else{
                 *response == 'n'; //You can clean it.
             cout<<"Welcome to the user section"<<endl;
-         
+
             this->userSection();
 
             }
@@ -90,7 +90,7 @@
 
 void Welcome::userSection(){
 system("cls");
- cout<<" --- PLEASE CHECK THE STUDENT.CSV FILE TO FIND CREDENTIALS YOU CAN TEST  ---- "<<endl;   
+ cout<<" --- PLEASE CHECK THE STUDENT.CSV FILE TO FIND CREDENTIALS YOU CAN TEST  ---- "<<endl;
 cout<<"Enter your index number ";cin>>this->index_number;
 cout<<"Enter your password ";cin>>this->password;
 
@@ -105,7 +105,7 @@ void Welcome::verifyStudent(){
 Student* currentStudent = new Student;
 bool value  = currentStudent->verify_student(this->index_number, this->password,currentStudent);
  if(value){
- 
+
 system("cls");
  cout<<"Welcome to the Student Dashboard"<<endl;
  cout<<"1. My Result"<<endl;
@@ -126,10 +126,10 @@ system("cls");
 void Welcome::continueUserSection(){
  if(choice == '1'){
    system("cls");
-   
+
    Result* studentResult = new Result();
    studentResult->display_result(this->index_number,studentResult);
-  
+
 
 
  }else if(choice == '2'){
@@ -196,10 +196,10 @@ app->create_application(this->index_number);
             // verification would be done later.
             School*schoolrecord = new School();
             bool value = schoolrecord->verify_school(this->school_number,this->password,schoolrecord);
-         
+
 
            if(value){
-            // The user is an admin 
+            // The user is an admin
 
            }else {
             // The user has no account
@@ -214,21 +214,21 @@ app->create_application(this->index_number);
             cout<<"\t\t\t\t\t\t1.Courses Features"<<endl;
             cout<<"\t\t\t\t\t\t2.School profile  Features"<<endl;
             cout<<"\t\t\t\t\t\t3.Admission  Features"<<endl;
- cout<<"\t\t\t\t\t||---------------------------------------------||"<<endl;           
+ cout<<"\t\t\t\t\t||---------------------------------------------||"<<endl;
           this->courseResponse = getch();
                  system("cls");
             switch(this->courseResponse){
-                     case '1': 
-                    cout<<"Welcome to the course Feature where you would be able to  create, read , update and delete courses "<<endl;          
+                     case '1':
+                    cout<<"Welcome to the course Feature where you would be able to  create, read , update and delete courses "<<endl;
                       cout<<"1. Create New course"<<endl;
                       cout<<"2. View Course"<<endl;
-                   
-                   
+
+
                       this->choice = getch();
                       this->continueCourse();
-                
+
                     break;
-                 case '2': 
+                 case '2':
                    cout<<"Welcome to the School Profile where you can get the information of your school"<<endl;
                    cout<<"1. View Your School Profile"<<endl;
                    this->choice = getch();
@@ -239,32 +239,32 @@ app->create_application(this->index_number);
 
                     break;
 
-                   case '3': 
+                   case '3':
                  cout<<"Welcome to the Admission feature where you can find pending applicants and accepted applicants"<<endl;
                   cout<<"1.View the List of applicants"<<endl;
                   cout<<"2.Verify admission status"<<endl;
                                this->choice = getch();
                         if(  this->choice== '1'  ){
                            this->continueAdmissionFeature();
-                         
+
                         }else if( this->choice == '2'){
 
                         // function to update the status
-                         
+
                         Application application = Application();
                         application.update_admission_status(this->school_number);
                         }
 
 
 
-              
-                 
-                   
+
+
+
                     break;
 
-                  default: 
+                  default:
                    cout<<"Please try again "<<endl;
-                   this->verifyResponse();      
+                   this->verifyResponse();
 
             }
 
@@ -275,7 +275,7 @@ app->create_application(this->index_number);
              else if(this->response == 'n'){
 
              }
-         
+
 
 
 
@@ -295,13 +295,13 @@ this->choice = getch();
             // while(getch() == 27 || getch() == 13);
             if(this->choice == 27){
             this->verifyResponse();
-        
+
 
             }else if(this->choice == 13){
       system("cls");
             restart();
             }
-                
+
 
 
 
@@ -314,7 +314,7 @@ void Welcome::continueSchoolProfile(){
 
 
       if(this->choice == '1'){
-        
+
 
 School* school = new School();
 school->retrieve(school,this->school_number);
@@ -362,7 +362,7 @@ void Welcome::continueCourse(){
 }
 
 void Welcome::createNewCourse(){
- 
+
 Course* course = new Course();
 course->create_course(this->school_number);
 
@@ -371,8 +371,8 @@ course->create_course(this->school_number);
    char response = getch();
      if(response == 13){
       system("cls");
-  this-> verifyResponse();      
- 
+  this-> verifyResponse();
+
      }else if (response == 27){
       system("cls");
            this->verifyResponse();
@@ -380,11 +380,11 @@ course->create_course(this->school_number);
      {
         /* code */
      }
-     
+
 }
 
 void Welcome::viewCourse(){
- 
+
  cout<<"You want to view courses"<<endl;
 
 

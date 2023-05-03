@@ -3,13 +3,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-<<<<<<< HEAD
-#include<sstream>;
-#include <vector>;
-=======
 #include<sstream>
 #include <vector>
->>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
 #include <algorithm>
 #include <iterator>
 #include <array>
@@ -66,11 +61,7 @@ fstream file;
 
 file.open("application.csv", ios::out | ios::app );
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
 cout<<"Here are the High Schools You can enroll for and the details of the courses they offer \n\n"<<endl;
 for(auto school: schools){
     cout<<"School id - "<<school.school_id<<":"<<school.schoolName<<endl;
@@ -108,6 +99,7 @@ file<<index_no<<","
 
 file.close();
 }
+
     //Helps to View the Application of a Student
     void view_application(int index_no, Application*app){
 
@@ -220,16 +212,15 @@ file.close();
 
 
     //View All Applications for a School
-<<<<<<< HEAD
-    view_applications(int school_no, Application*app){
-=======
+
+
     void view_applications(int school_no, Application*app){
->>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
+
 
     vector<Application> applications;
     ifstream file;
     file.open("application.csv",ios::out|ios::app); //We open the csv file containin the data
-<<<<<<< HEAD
+
 
 // This block of code gets the first line of the csv file which is the title.
     string line="";
@@ -240,7 +231,7 @@ file.close();
     while(getline(file,line)){
 
 
-=======
+
 
 // This block of code gets the first line of the csv file which is the title.
     string line="";
@@ -251,7 +242,7 @@ file.close();
     while(getline(file,line)){
 
 
->>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
+
         int indexnumber;
         int firstchoice[3];
         int secondchoice[3];
@@ -375,7 +366,7 @@ file.close();
 
     }
 
-
+    }
     void update_admission_status(int school_id){
 
     const string filename = "application.csv";
@@ -446,25 +437,24 @@ file.close();
     outfile.close();
 
     // Replace the original file with the updated file
-<<<<<<< HEAD
+
     remove(filename.c_str());
     rename(temp_filename.c_str(), filename.c_str());
 
 
 
 
-=======
-    
     remove(filename.c_str());
     rename(temp_filename.c_str(), filename.c_str());
 
 cout<<"The Quallified Applicants have beeen admitted(All qualified applicants per the cut off scores wiill be admitted)\n";
 Application*app = new Application();
 view_applications(school_id,app);
->>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
 
 
     }
-};
+    };
+
+
 
 #endif // APPLICATION_H_INCLUDED

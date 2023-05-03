@@ -1,4 +1,4 @@
-+#ifndef COURSE_H_INCLUDED
+#define COURSE_H_INCLUDED
 #define COURSE_H_INCLUDED
 #include <iostream>
 #include <string>
@@ -16,17 +16,11 @@ public:
         int max_enrollment;
         unsigned int basescore;
 public:
-<<<<<<< HEAD
-
-        void set_course(int cid,string name,int sid, int max_num,int bscore)
-                {course_id = cid; course_name = name; school_id = sid; max_enrollment = max_num; basescore=bscore; }
-=======
         //The method  helps to set the attributes of the object being created
         void set_course(int cid,string name,int sid, int max_num,int bscore)
                 {course_id = cid; course_name = name; school_id = sid; max_enrollment = max_num; basescore=bscore; }
-        
+
         //This method  is  to help cinsert course detiuals into the csv file
->>>>>>> 730bcc49a24d8043fa204bdfe4eed1e4babba2d6
         void create_course(int schoolid){
         fstream fout;
         string coursename;
@@ -188,4 +182,4 @@ private:
 
 };
 
-#endif // COURSE_H_INCLUDED
+
